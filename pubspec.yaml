@@ -40,6 +40,7 @@ dependencies:
   dartz: ^0.10.1
   equatable: ^2.0.5
   shared_preferences: ^2.5.4
+  modal_progress_hud_nsn: ^0.5.1
 
 dev_dependencies:
   flutter_lints: ^6.0.0
