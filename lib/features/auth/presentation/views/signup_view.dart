@@ -6,11 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../Core/utils/app_colors.dart';
+import '../../../../core/components/custom_snackbar.dart';
 import '../../../../core/components/custom_app_bar.dart';
 import '../../../../core/components/custom_button.dart';
 import '../../../../core/components/custom_progress_hud.dart';
-import '../../../../core/components/custom_snack_bar.dart';
 import '../../../../core/components/custom_text_form_field.dart';
+import '../../../../core/extentions/context_extentions.dart';
 import '../../../../core/route/routes.dart';
 
 class SignupView extends StatefulWidget {
@@ -21,7 +22,6 @@ class SignupView extends StatefulWidget {
 }
 
 class _SignupViewState extends State<SignupView> {
-  bool isObscure = true;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -40,11 +40,17 @@ class _SignupViewState extends State<SignupView> {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state is SignupFailure) {
-          showErrorSnackBar(context, state.errMessage);
+          context.showSnackBar(
+            message: state.errMessage,
+            state: SnackBarStates.error,
+          );
         }
         if (state is SignUpSuccess) {
-          showSuccessSnackBar(context, "Account created successfully");
-          Navigator.pushNamed(context, Routes.login);
+          context.showSnackBar(
+            message: "Account created successfully",
+            state: SnackBarStates.success,
+          );
+          Navigator.pushReplacementNamed(context, Routes.login);
         }
       },
       builder: (context, state) {
@@ -63,35 +69,20 @@ class _SignupViewState extends State<SignupView> {
                         SizedBox(height: 40.h),
 
                         CustomTextFormField(
+                          key: Key("name_field"),
                           label: "Name",
                           controller: nameController,
                         ),
                         SizedBox(height: 20.h),
                         CustomTextFormField(
+                          key: Key("email_field"),
                           label: "Email",
                           controller: emailController,
                         ),
                         SizedBox(height: 20.h),
-                        CustomTextFormField(
-                          label: "Password",
+                        CustomPassWordField(
+                          key: Key("password_field"),
                           controller: passwordController,
-                          obscureText: isObscure,
-                          suffixIcon: IconButton(
-                            icon: isObscure
-                                ? const Icon(
-                                    Icons.visibility_off,
-                                    color: AppColors.primaryColor,
-                                  )
-                                : const Icon(
-                                    Icons.visibility,
-                                    color: AppColors.primaryColor,
-                                  ),
-                            onPressed: () {
-                              setState(() {
-                                isObscure = !isObscure;
-                              });
-                            },
-                          ),
                         ),
 
                         SizedBox(height: 50.h),

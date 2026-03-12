@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../utils/app_colors.dart';
+
 class CustomProgressHud extends StatelessWidget {
-  const CustomProgressHud(
-      {super.key, required this.inAsyncCall, required this.child});
+  const CustomProgressHud({
+    super.key,
+    required this.inAsyncCall,
+    required this.child,
+  });
   final bool inAsyncCall;
   final Widget child;
 
@@ -22,6 +27,6 @@ class CustomLoadingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CircularProgressIndicator();
+    return const CircularProgressIndicator(color: AppColors.primaryColor);
   }
 }
