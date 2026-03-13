@@ -62,11 +62,9 @@ void main() {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
-      final navigationText = find.textContaining('Sign Up');
+      final navigationText = find.text("Sign Up");
       expect(navigationText, findsOneWidget);
-      await tester.tapAt(
-        tester.getBottomRight(navigationText).translate(-30, -15),
-      );
+      await tester.tap(navigationText);
       await tester.pumpAndSettle();
 
       expect(find.byType(SignupView), findsOneWidget);

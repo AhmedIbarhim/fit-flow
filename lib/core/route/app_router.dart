@@ -1,5 +1,4 @@
 import 'package:fit_flow/core/di/service_locator.dart';
-import 'package:fit_flow/features/auth/domain/repos/auth_repo.dart';
 import 'package:fit_flow/features/auth/presentation/controllers/login_controller/login_cubit.dart';
 import 'package:fit_flow/features/auth/presentation/controllers/signup_controller/signup_cubit.dart';
 import 'package:fit_flow/features/auth/presentation/views/login_view.dart';
@@ -20,7 +19,7 @@ class AppRouter {
       case Routes.login:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => LoginCubit(authRepo: locator<AuthRepo>()),
+            create: (context) => locator<LoginCubit>(),
             child: const LoginView(),
           ),
         );
@@ -28,7 +27,7 @@ class AppRouter {
       case Routes.signup:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => SignupCubit(authRepo: locator<AuthRepo>()),
+            create: (context) => locator<SignupCubit>(),
             child: const SignupView(),
           ),
         );

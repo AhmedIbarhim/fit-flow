@@ -61,11 +61,9 @@ void main() {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
-      final navigationText = find.textContaining('Login');
+      final navigationText = find.text("Login");
       expect(navigationText, findsOneWidget);
-      await tester.tapAt(
-        tester.getBottomRight(navigationText).translate(-30, -15),
-      );
+      await tester.tap(navigationText);
       await tester.pumpAndSettle();
 
       expect(find.byType(LoginView), findsOneWidget);
@@ -159,7 +157,7 @@ void main() {
         () => mockAuthRepo.createUserWithEmailAndPassword(
           userName: "name",
           email: "fail@mail.com",
-          password: "wrongpassword",
+          password: "wrongPassword",
         ),
       ).thenAnswer((_) async {
         return Left(ServerFailure(errorMessage));
@@ -175,7 +173,7 @@ void main() {
 
       await tester.enterText(nameField, "name");
       await tester.enterText(emailField, "fail@mail.com");
-      await tester.enterText(passwordField, "wrongpassword");
+      await tester.enterText(passwordField, "wrongPassword");
       await tester.tap(signupButton);
       await tester.pump();
       await tester.pumpAndSettle();

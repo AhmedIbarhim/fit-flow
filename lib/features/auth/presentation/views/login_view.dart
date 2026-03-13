@@ -1,6 +1,5 @@
 import 'package:fit_flow/core/utils/app_text_styles.dart';
 import 'package:fit_flow/features/auth/presentation/controllers/login_controller/login_cubit.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -104,30 +103,30 @@ class _LoginViewState extends State<LoginView> {
                           },
                         ),
                         SizedBox(height: 20.h),
-                        Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Don’t have an account? ',
-                                style: AppTextStyles.bold16.copyWith(
-                                  color: const Color(0xFF949D9E),
-                                ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Don’t have an account? ',
+                              style: AppTextStyles.bold16.copyWith(
+                                color: const Color(0xFF949D9E),
                               ),
-                              TextSpan(
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushReplacementNamed(
-                                      context,
-                                      Routes.signup,
-                                    );
-                                  },
-                                text: 'Sign Up',
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  Routes.signup,
+                                );
+                              },
+                              child: Text(
+                                'Sign Up',
                                 style: AppTextStyles.bold16.copyWith(
                                   color: AppColors.primaryColor,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 20.h),
                       ],
